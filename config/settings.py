@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,8 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', "False").lower() == 'true'
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
 
 # Application definition
 
@@ -102,10 +104,10 @@ DATABASES = {
     }
 }
 #
-# database_url = os.environ.get('DATABASE_URL')
-#
-# DATABASES['default'] = dj_database_url.parse(database_url)
-#
+database_url = os.environ.get('DATABASE_URL')
+
+DATABASES['default'] = dj_database_url.parse(database_url)
+
 #
 # 'postgres://mahalla_database_user:kMkHRtn0wjwmKwVFDvQan1XOzGPEdWV6@dpg-coho8sgl5elc73cra4n0-a.oregon-postgres.render.com/mahalla_database'
 # Password validation
